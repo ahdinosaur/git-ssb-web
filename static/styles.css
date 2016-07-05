@@ -22,6 +22,7 @@ pre {
   border: 1px solid #ddd;
   background: #f8f8f8;
   border-radius: .5ex;
+  white-space: pre-wrap; 
 }
 
 section code {
