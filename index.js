@@ -109,7 +109,7 @@ function GitSSBWeb(ssb, config, reconnect) {
 
   if (config.logging && config.logging.level)
     this.logLevel = this.logLevels.indexOf(config.logging.level)
-  this.ssbAppname = config.appname || 'ssb'
+  this.ssbAppname = config.appname || 'gitmx'
   this.isPublic = config.public
   this.getVotes = require('./lib/votes')(ssb)
   this.getMsg = asyncMemo(ssb.get)
@@ -449,7 +449,7 @@ G.serveTemplate = function (req, title, code, read) {
         'Content-Type': 'text/html'
       }],
       '<!doctype html><html><head><meta charset=utf-8>',
-      '<title>' + (title || app) + '</title>',
+      '<title>' + (title || app) + " | " +  (app) + '</title>',
       '<link rel=stylesheet href="/static/styles.css"/>',
       '<link rel=stylesheet href="/highlight/github.css"/>',
       '</head>\n',
