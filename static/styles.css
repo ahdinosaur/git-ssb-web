@@ -18,11 +18,10 @@ article, header {
 }
 
 pre {
-  font: 12px/1.45 Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font: 1em Consolas, "Liberation Mono", Menlo, Courier, monospace;
   padding: .5em 1.25ex;
   border: 1px solid #ddd;
-  background: #f8f8f8;
-  border-radius: .5ex;
+  background: #f5f5f5;
   white-space: pre-wrap; 
 }
 
@@ -68,8 +67,9 @@ header .search-bar {
 .profile-icon {
   height: 1.5em;
   width: 1.5em;
-  margin: .5em .5ex 0 .5ex;
+  margin: .5em .5ex 0 .2ex;
   border: none;
+  float: left;
 }
 
 .icon-right {
@@ -99,11 +99,11 @@ h3 ~ h4 {
 }
 
 a:link, a:visited {
-  color: #666;
+  color: #333;
   text-decoration: none;
 }
 a:hover {
-  color: #333;
+  color: #111;
 }
 
 hr {
@@ -155,7 +155,6 @@ section img {
   border: 1px solid #aaa;
   border-top: 1px solid #ccc;
   border-left: 1px solid #ccc;
-//  border-radius: 5px;
   color: #444;
   display: inline-block;
   font-size: 1em;
@@ -210,15 +209,13 @@ label {
   color: #666;
   padding: .3em 1ex;
   background-color: white;
-  border: 1px #ccc;
-  border-style: none solid solid none;
-  border-radius: .5ex;
+  border: none;
   float: right;
   margin: 0;
   max-width: 50%;
 }
 .clone-url:hover {
-  background-color: #f6f6f6;
+  color: #000;
 }
 
 nav {

@@ -449,7 +449,7 @@ G.serveTemplate = function (req, title, code, read) {
         'Content-Type': 'text/html'
       }],
       '<!doctype html><html><head><meta charset=utf-8>',
-      '<title>' + (title || app) + " | " +  (app) + '</title>',
+      '<title>' + (title || app) + " | " +  "gitmx" + '</title>',
       '<link rel=stylesheet href="/static/styles.css"/>',
       '<link rel=stylesheet href="/highlight/github.css"/>',
       '</head>\n',
