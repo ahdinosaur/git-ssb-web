@@ -1,11 +1,11 @@
 {
   "name": "git-ssb-web",
-  "version": "1.15.3",
+  "version": "1.16.0",
   "description": "web server for browsing git repos on ssb",
   "bin": "server.js",
   "dependencies": {
     "asyncmemo": "^0.1.0",
-    "diff": "^2.2.2",
+    "diff": "^2.2.3",
     "highlight.js": "^9.2.0",
     "mime-types": "^2.1.11",
     "multicb": "^1.2.1",
@@ -19,16 +19,16 @@
     "pull-stream": "^3.1.0",
     "ssb-client": "^3.0.1",
     "ssb-config": "^1.1.0",
-    "ssb-git-repo": "^1.7.0",
-    "ssb-issues": "^0.1.1",
+    "ssb-git-repo": "^1.8.0",
+    "ssb-issues": "^0.1.4",
     "ssb-keys": "^5.0.0",
     "ssb-marked": "^0.6.0",
     "ssb-mentions": "^0.1.0",
     "ssb-msg-schemas": "^6.1.0",
-    "ssb-pull-requests": "~0.0.3",
+    "ssb-pull-requests": "^0.0.4",
     "ssb-reconnect": "^0.1.0",
     "ssb-ref": "^2.2.2",
-    "stream-to-pull-stream": "^1.6.6"
+    "stream-to-pull-stream": "^1.7.0"
   },
   "homepage": "http://git-ssb.celehner.com/%25q5d5Du%2B9WkaSdjc8aJPZm%2BjMrqgo0tmfR%2BRcX5ZZ6H4%3D.sha256",
   "repository": {
