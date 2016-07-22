@@ -13,7 +13,7 @@ article, header {
 
 @media (min-width: 600px) {
   article, header { 
-    width: 60%; 
+    width: 600px; 
   }
 }
 
@@ -33,7 +33,7 @@ section code {
 
 pre > code {
   padding: 0;
-  background-color: #f8f8f8;
+  background-color: #f5f5f5;
 }
 
 /* header */
@@ -68,7 +68,7 @@ header .search-bar {
   height: 1.5em;
   width: 1.5em;
   margin: .5em .5ex 0 .2ex;
-  border: none;
+  border: 1px solid #eee;
   float: left;
 }
 
@@ -81,9 +81,9 @@ header .search-bar {
 section {
   background-color: white;
   padding: 1ex 1ex;
-  margin-bottom: 1ex;
+  margin-bottom: .5em;
   border-radius: 0;
-  border: 1px solid #f5f5f5;
+  border: 1px solid #eee;
 }
 
 section.collapse {
@@ -109,12 +109,6 @@ a:hover {
 hr {
   border: 0;
   border-bottom: 1px solid #ddd;
-}
-
-i {
-  font-family: Symbola, 'Apple Color Emoji', 'Android Emoji',
-    'Segoe UI Symbol', 'DejaVu Sans', sans-serif;
-  font-style: inherit;
 }
 
 section img {
@@ -148,6 +142,8 @@ section img {
 .repo-title .right-bar {
   margin-top: .25em;
 }
+
+input { border: 1px solid #eee;} 
 
 .btn {
   background: #eee;
