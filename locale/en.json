@@ -116,9 +116,6 @@
       "Closed": "Closed"
     },
     "New": "New Issue",
-    "Title": "Issue Title",
-    "Description": "Description",
-    "Rename": "Rename the issue",
     "Opened": "%{name} opened this issue on %{datetime}",
     "Reopened": "%{name} reopened this %{type}",
     "Closed": "%{name} closed this %{type}",
@@ -130,7 +127,6 @@
     "Reopen": "Reopen %{type}"
   },
   "pullRequest": {
-    "Rename": "Rename the pull request",
     "WantToMerge": "%{name} wants to merge commits into %{base} from %{head}",
     "Discussion": "Discussion",
     "New": "New Pull Request"

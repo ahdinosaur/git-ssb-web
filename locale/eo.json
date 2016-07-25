@@ -116,9 +116,6 @@
       "Closed": "Fermita"
     },
     "New": "Nova Temo",
-    "Title": "Temo titolo",
-    "Description": "Priskribo",
-    "Rename": "Renomiĝi la temon",
     "Opened": "%{name} malfermis tiun temon je %{datetime}",
     "Reopened": "%{name} remalfermis tiun %{type}",
     "Closed": "%{name} fermis tiun %{type}",
@@ -130,7 +127,6 @@
     "Reopen": "Remalfermi %{type}"
   },
   "pullRequest": {
-    "Rename": "Alinomigado el tiro-petojn",
     "WantToMerge": "%{name} volas kunfandi enmetoj en %{base} de %{head}",
     "Discussion": "Priparolado",
     "New": "Nova Tiro-peto"
