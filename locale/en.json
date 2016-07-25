@@ -152,5 +152,10 @@
     "MergeViaCmdLine": "Merge via command line…",
     "CheckOut": "Check out the branch and test the changes:",
     "MergeAndPush": "Merge the changes and push to update the base branch:"
+  },
+  "diff": {
+    "TooLarge": "The diff is too large to show. Use a local git client to view these changes.",
+    "OldFileSize": "Old file size: %{bytes} bytes",
+    "NewFileSize": "New file size: %{bytes} bytes"
   }
 }

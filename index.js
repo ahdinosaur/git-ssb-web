@@ -500,6 +500,7 @@ G.renderObjectData = function (obj, filename, repo, rev, path) {
       if (err) return cb(err)
       cb(null, (ext == 'md' || ext == 'markdown')
         ? markdown(buf, {repo: repo, rev: rev, path: path})
+        : buf.length > 1000000 ? ''
         : renderCodeTable(buf, ext))
     })
   })
