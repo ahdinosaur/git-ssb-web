@@ -441,6 +441,14 @@ h3 .user-id {
 
 .compare-commits td:first-child {
   padding-left: 2ex;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 10em;
+}
+
+.commit-title {
+  word-break: break-all;
 }
 
 .pr-tab-links {
