@@ -25,7 +25,7 @@
     "ssb-marked": "^0.6.0",
     "ssb-mentions": "^0.1.0",
     "ssb-msg-schemas": "^6.1.0",
-    "ssb-pull-requests": "^0.1.0",
+    "ssb-pull-requests": "^0.1.1",
     "ssb-reconnect": "^0.1.0",
     "ssb-ref": "^2.2.2",
     "stream-to-pull-stream": "^1.7.0"
