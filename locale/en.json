@@ -116,9 +116,6 @@
       "Closed": "Closed"
     },
     "New": "New Issue",
-    "Title": "Issue Title",
-    "Description": "Description",
-    "Rename": "Rename the issue",
     "Opened": "%{name} opened this issue on %{datetime}",
     "Reopened": "%{name} reopened this %{type}",
     "Closed": "%{name} closed this %{type}",
@@ -130,7 +127,6 @@
     "Reopen": "Reopen %{type}"
   },
   "pullRequest": {
-    "Rename": "Rename the pull request",
     "WantToMerge": "%{name} wants to merge commits into %{base} from %{head}",
     "Discussion": "Discussion",
     "New": "New Pull Request"
@@ -152,5 +148,10 @@
     "MergeViaCmdLine": "Merge via command line…",
     "CheckOut": "Check out the branch and test the changes:",
     "MergeAndPush": "Merge the changes and push to update the base branch:"
+  },
+  "diff": {
+    "TooLarge": "The diff is too large to show. Use a local git client to view these changes.",
+    "OldFileSize": "Old file size: %{bytes} bytes",
+    "NewFileSize": "New file size: %{bytes} bytes"
   }
 }

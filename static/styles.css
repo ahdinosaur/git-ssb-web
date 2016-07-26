@@ -370,12 +370,18 @@ h3 .user-id {
 .code {
   border-collapse: collapse;
   text-align: left;
+  width: 100%;
 }
 
 .code th {
   font-family: sans-serif;
   font-size: 1.25em;
   padding-bottom: .5ex;
+}
+
+.diff-info {
+  font-family: sans-serif;
+  font-size: 1.25em;
 }
 
 .diff-hunk-header {
@@ -443,6 +449,14 @@ h3 .user-id {
 
 .compare-commits td:first-child {
   padding-left: 2ex;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 10em;
+}
+
+.commit-title {
+  word-break: break-all;
 }
 
 .pr-tab-links {

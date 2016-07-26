@@ -293,19 +293,6 @@ G.handlePOST = function (req, dir) {
           cb(null, self.serveRedirect(req, req.url))
         })
 
-      case 'issue-title':
-        if (!data.id)
-          return cb(null, self.serveError(req,
-            new ParamError(req._t('error.MissingId')), 400))
-        if (!data.name)
-          return cb(null, self.serveError(req,
-            new ParamError(req._t('error.MissingName')), 400))
-        var msg = Issues.schemas.edit(data.id, {title: data.name})
-        return self.ssb.publish(msg, function (err) {
-          if (err) return cb(null, self.serveError(req, err))
-          cb(null, self.serveRedirect(req, req.url))
-        })
-
       case 'comment':
         if (!data.id)
           return cb(null, self.serveError(req,
@@ -326,7 +313,7 @@ G.handlePOST = function (req, dir) {
         })
 
       case 'new-issue':
-        var msg = Issues.schemas.new(dir, data.title, data.text)
+        var msg = Issues.schemas.new(dir, data.text)
         var mentions = Mentions(data.text)
         if (mentions.length)
           msg.mentions = mentions
@@ -337,7 +324,7 @@ G.handlePOST = function (req, dir) {
 
       case 'new-pull':
         var msg = PullRequests.schemas.new(dir, data.branch,
-          data.head_repo, data.head_branch, data.title, data.text)
+          data.head_repo, data.head_branch, data.text)
         var mentions = Mentions(data.text)
         if (mentions.length)
           msg.mentions = mentions
@@ -500,6 +487,7 @@ G.renderObjectData = function (obj, filename, repo, rev, path) {
       if (err) return cb(err)
       cb(null, (ext == 'md' || ext == 'markdown')
         ? markdown(buf, {repo: repo, rev: rev, path: path})
+        : buf.length > 1000000 ? ''
         : renderCodeTable(buf, ext))
     })
   })
@@ -619,7 +607,7 @@ G.renderFeedItem = function (req, msg, cb) {
       })
     case 'issue':
     case 'pull-request':
-      var issueLink = u.link([msg.key], c.title)
+      var issueLink = u.link([msg.key], u.messageTitle(msg))
       return self.getMsg(c.project, function (err, projectMsg) {
         if (err) return cb(null,
           self.repos.serveRepoNotFound(req, c.repo, err))
