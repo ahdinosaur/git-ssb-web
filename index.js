@@ -428,7 +428,7 @@ G.serveTemplate = function (req, title, code, read) {
   if (read === undefined)
     return this.serveTemplate.bind(this, req, title, code)
   var q = req._u.query.q && u.escape(req._u.query.q) || ''
-  var app = 'git ssb'
+  var app = 'GitMX'
   var appName = this.ssbAppname
   if (req._t) app = req._t(app)
   return cat([
@@ -465,9 +465,9 @@ G.serveTemplate = function (req, title, code, read) {
         ' placeholder="🔍" value="' + q + '" />' +
       '</form>' +
       '</header>' +
-      '<article>'),
+      '<article><hr />'),
     this.renderTry(read),
-    pull.once('<hr/></article></body></html>')
+    pull.once('<hr/><p style="font-size: .8em;">Built with <a href="http://git-ssb.celehner.com">git-ssb-web</a></p></article></body></html>')
   ])
 }
 
