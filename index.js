@@ -23,6 +23,7 @@ var Mentions = require('ssb-mentions')
 var many = require('pull-many')
 var ident = require('pull-identify-filetype')
 var mime = require('mime-types')
+var moment = require('moment')
 
 var hlCssPath = path.resolve(require.resolve('highlight.js'), '../../styles')
 
@@ -109,7 +110,7 @@ function GitSSBWeb(ssb, config, reconnect) {
 
   if (config.logging && config.logging.level)
     this.logLevel = this.logLevels.indexOf(config.logging.level)
-  this.ssbAppname = config.appname || 'gitmx'
+  this.ssbAppname = config.appname
   this.isPublic = config.public
   this.getVotes = require('./lib/votes')(ssb)
   this.getMsg = asyncMemo(ssb.get)
@@ -436,7 +437,7 @@ G.serveTemplate = function (req, title, code, read) {
         'Content-Type': 'text/html'
       }],
       '<!doctype html><html><head><meta charset=utf-8>',
-      '<title>' + (title || app) + " | " +  "gitmx" + '</title>',
+      '<title>' + (title || app) + '</title>',
       '<link rel=stylesheet href="/static/styles.css"/>',
       '<link rel=stylesheet href="/highlight/github.css"/>',
       '</head>\n',
@@ -522,7 +523,7 @@ G.renderFeed = function (req, feedId, filter) {
         || (c.type == 'post' && c.repo && c.issue)
     }),
     typeof filter == 'function' ? filter(opts) : filter,
-    pull.take(20),
+    pull.take(50),
     this.addAuthorName(),
     query.forwards && u.pullReverse(),
     paginate(
@@ -563,8 +564,7 @@ G.renderFeed = function (req, feedId, filter) {
 G.renderFeedItem = function (req, msg, cb) {
   var self = this
   var c = msg.value.content
-  var msgLink = u.link([msg.key],
-    new Date(msg.value.timestamp).toLocaleString(req._locale))
+  var msgDate = moment(new Date(msg.value.timestamp)).fromNow()
   var author = msg.value.author
   var authorLink = u.link([msg.value.author], msg.authorName)
   switch (c.type) {
@@ -576,34 +576,34 @@ G.renderFeedItem = function (req, msg, cb) {
           if (err) return cb(null, self.serveError(req, err))
           self.getRepoName(upstreamMsg.author, c.upstream, done())
           done(function (err, repoName, upstreamName) {
-            cb(null, '<section class="collapse">' + msgLink + '<br>' +
+            cb(null, '<section class="collapse">' +
               req._t('Forked', {
                 name: authorLink,
                 upstream: u.link([c.upstream], upstreamName),
                 repo: u.link([msg.key], repoName)
-              }) + '</section>')
+              }) + ' <span class="date">' + msgDate + '</span></section>')
           })
         })
       } else {
         return done(function (err, repoName) {
           if (err) return cb(err)
           var repoLink = u.link([msg.key], repoName)
-          cb(null, '<section class="collapse">' + msgLink + '<br>' +
+          cb(null, '<section class="collapse">' +
             req._t('CreatedRepo', {
               name: authorLink,
               repo: repoLink
-            }) + '</section>')
+            }) + ' <span class="date">' + msgDate + '</span></section>')
         })
       }
     case 'git-update':
       return self.getRepoName(author, c.repo, function (err, repoName) {
         if (err) return cb(err)
         var repoLink = u.link([c.repo], repoName)
-        cb(null, '<section class="collapse">' + msgLink + '<br>' +
+        cb(null, '<section class="collapse">' +
           req._t('Pushed', {
             name: authorLink,
             repo: repoLink
-          }) + '</section>')
+          }) + ' <span class="date">' + msgDate + '</span></section>')
       })
     case 'issue':
     case 'pull-request':
@@ -615,18 +615,18 @@ G.renderFeedItem = function (req, msg, cb) {
           function (err, repoName) {
             if (err) return cb(err)
             var repoLink = u.link([c.project], repoName)
-            cb(null, '<section class="collapse">' + msgLink + '<br>' +
+            cb(null, '<section class="collapse">' +
               req._t('OpenedIssue', {
                 name: authorLink,
                 type: req._t(c.type == 'pull-request' ?
                   'pull request' : 'issue.'),
                 title: issueLink,
                 project: repoLink
-              }) + '</section>')
+              }) + ' <span class="date">' + msgDate + '</span></section>')
           })
       })
     case 'about':
-      return cb(null, '<section class="collapse">' + msgLink + '<br>' +
+      return cb(null, '<section class="collapse">' +
         req._t('Named', {
           author: authorLink,
           target: '<tt>' + u.escape(c.about) + '</tt>',
@@ -638,7 +638,7 @@ G.renderFeedItem = function (req, msg, cb) {
         var type = pr.msg.value.content.type == 'pull-request' ?
           'pull request' : 'issue.'
         var changed = self.issues.isStatusChanged(msg, pr)
-        return cb(null, '<section class="collapse">' + msgLink + '<br>' +
+        return cb(null, '<section class="collapse">' +
           req._t(changed == null ? 'CommentedOn' :
               changed ? 'ReopenedIssue' : 'ClosedIssue', {
             name: authorLink,
