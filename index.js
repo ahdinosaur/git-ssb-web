@@ -439,7 +439,7 @@ G.serveTemplate = function (req, title, code, read) {
       '<!doctype html><html><head><meta charset=utf-8>',
       '<title>' + (title || app) + '</title>',
       '<link rel=stylesheet href="/static/styles.css"/>',
-      '<link rel=stylesheet href="/highlight/github.css"/>',
+      '<link rel=stylesheet href="/highlight/foundation.css"/>',
       '</head>\n',
       '<body>',
       '<header>'
