@@ -462,7 +462,7 @@ G.serveTemplate = function (req, title, code, read) {
         (appName == 'ssb' ? '' : ' <sub>' + appName + '</sub>') +
       '</a></h1> ' +
       '<input class="search-bar" name="q" size="60"' +
-        ' placeholder="🔍" value="' + q + '" />' +
+        ' placeholder=" Search" value="' + q + '" />' +
       '</form>' +
       '</header>' +
       '<article><hr />'),
@@ -523,7 +523,7 @@ G.renderFeed = function (req, feedId, filter) {
         || (c.type == 'post' && c.repo && c.issue)
     }),
     typeof filter == 'function' ? filter(opts) : filter,
-    pull.take(50),
+    pull.take(100),
     this.addAuthorName(),
     query.forwards && u.pullReverse(),
     paginate(
@@ -534,7 +534,7 @@ G.renderFeed = function (req, feedId, filter) {
         query.forwards = 1
         delete query.lt
         cb(null, '<a href="?' + qs.stringify(query) + '">' +
-          req._t('Newer') + '</a>')
+          req._t('Next') + '</a>')
       },
       paramap(this.renderFeedItem.bind(this, req), 8),
       function (last, cb) {
@@ -542,7 +542,7 @@ G.renderFeed = function (req, feedId, filter) {
         delete query.gt
         delete query.forwards
         cb(null, '<a href="?' + qs.stringify(query) + '">' +
-          req._t('Older') + '</a>')
+          req._t('Previous') + '</a>')
       },
       function (cb) {
         if (query.forwards) {
