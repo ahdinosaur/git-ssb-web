@@ -117,6 +117,14 @@ hr {
   border-bottom: 1px solid #eee;
 }
 
+/* icons */
+
+i {
+  font-family: Symbola, 'Apple Color Emoji', 'Android Emoji',
+    'Segoe UI Symbol', 'DejaVu Sans', sans-serif;
+  font-style: inherit;
+}
+
 section img {
   max-width: 100%;
 }
