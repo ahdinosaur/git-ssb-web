@@ -124,7 +124,9 @@
     "Renamed": "%{author} renomiĝis tiun %{type} al %{name}",
     "Comment": "Komenti",
     "Close": "Fermi %{type}",
-    "Reopen": "Remalfermi %{type}"
+    "CommentAndClose": "Komenti kaj Fermi",
+    "Reopen": "Remalfermi %{type}",
+    "CommandAndReopen": "Komenti kaj Remalfermi"
   },
   "pullRequest": {
     "WantToMerge": "%{name} volas kunfandi enmetoj en %{base} de %{head}",

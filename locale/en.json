@@ -124,7 +124,9 @@
     "Renamed": "%{author} renamed this %{type} to %{name}",
     "Comment": "Comment",
     "Close": "Close %{type}",
-    "Reopen": "Reopen %{type}"
+    "CommentAndClose": "Comment and Close",
+    "Reopen": "Reopen %{type}",
+    "CommentAndReopen": "Comment and Reopen"
   },
   "pullRequest": {
     "WantToMerge": "%{name} wants to merge commits into %{base} from %{head}",
