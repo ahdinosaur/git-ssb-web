@@ -110,7 +110,7 @@ function GitSSBWeb(ssb, config, reconnect) {
 
   if (config.logging && config.logging.level)
     this.logLevel = this.logLevels.indexOf(config.logging.level)
-  this.ssbAppname = config.appname
+  this.ssbAppname = config.appname || 'ssb'
   this.isPublic = config.public
   this.getVotes = require('./lib/votes')(ssb)
   this.getMsg = asyncMemo(ssb.get)
@@ -428,7 +428,7 @@ G.serveTemplate = function (req, title, code, read) {
   if (read === undefined)
     return this.serveTemplate.bind(this, req, title, code)
   var q = req._u.query.q && u.escape(req._u.query.q) || ''
-  var app = 'GitMX'
+  var app = 'git ssb'
   var appName = this.ssbAppname
   if (req._t) app = req._t(app)
   return cat([
