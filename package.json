@@ -1,6 +1,6 @@
 {
   "name": "git-ssb-web",
-  "version": "2.0.0-collab2",
+  "version": "2.0.0-collab3",
   "description": "web server for browsing git repos on ssb",
   "bin": "server.js",
   "dependencies": {
