@@ -68,12 +68,9 @@ header .search-bar {
 }
 
 .profile-icon {
-  height: 1.5em;
-  width: 1.5em;
-  margin-right: .2em;
-  margin-left: .15em;
-  margin-top: .4em;
-  margin-bottom: .5em;
+  height: 1.6em;
+  width: 1.6em;
+  margin: .4em 0 .5em .15em;
   border: 1px solid #eee;
   float: left;
 }
@@ -90,6 +87,14 @@ section {
   margin-bottom: .5em;
   border-radius: 0;
   border-bottom: 1px solid #eee;
+}
+
+section.branch-info, section.files {
+  border: none;
+}
+
+section.readme {
+  margin-top: 2em;
 }
 
 section.collapse {
@@ -153,8 +158,8 @@ section img {
   display: inline-block;
 }
 
-.repo-title .right-bar {
-  margin-top: .25em;
+.right-bar .btn {
+  margin-top: 0.2em;
 }
 
 input { border: 1px solid #eee;} 
@@ -246,6 +251,10 @@ nav a.active {
 }
 
 /* files list */
+
+table.files {
+  border: 1px #dedede solid;
+}
 
 .files td:first-child {
   padding: 0 1ex;
@@ -474,3 +483,12 @@ h3 .user-id {
 }
 
 .date { font-size: .8em; color: #666;}
+
+.dib { display: inline-block; }
+
+.w-100 { width: 100%; }
+
+.ml2 { margin-left: 2rem; }
+
+.light-grey { color: #909090; }
+
