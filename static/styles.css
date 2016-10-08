@@ -86,7 +86,7 @@ header .search-bar {
 
 section {
   background-color: white;
-  padding: 1ex 1ex;
+  padding: 1ex 0;
   margin-bottom: .5em;
   border-radius: 0;
   border-bottom: 1px solid #eee;
@@ -224,7 +224,7 @@ nav {
 
 nav a {
   border-radius: .5ex;
-  padding: 0 .5ex;
+  padding: 0 1ex 0 0;
   display: inline-block;
   margin-right: .5ex;
 }
