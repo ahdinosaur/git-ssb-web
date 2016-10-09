@@ -95,6 +95,9 @@ section.branch-info, section.files {
 
 section.readme {
   margin-top: 2em;
+  padding: 2em 2em 4em;
+  box-shadow: 2px 2px 10px #efefef;
+  border: 1px #efefef solid;
 }
 
 section.collapse {
@@ -210,13 +213,16 @@ label {
 
 .clone-url {
   font-size: small;
-  color: #666;
-  padding: .3em 1ex;
-  background-color: white;
   border: none;
+  border-radius: 4px;
   float: right;
   margin: 0;
+  margin-top: 0.2rem;
+  padding: 0 0.4rem;
   max-width: 50%;
+
+  background-color: #eaeaea;
+  color: #6f6f6f;
 }
 .clone-url:hover {
   color: #000;
@@ -441,10 +447,6 @@ h3 .user-id {
   font-weight: bold;
 }
 
-.compare-commits {
-  width: 100%;
-}
-
 .date-info {
   font-weight: normal;
   text-align: left;
@@ -490,5 +492,32 @@ h3 .user-id {
 
 .ml2 { margin-left: 2rem; }
 
+.float-right { float: right; }
+
 .light-grey { color: #909090; }
 
+select.custom-dropdown {
+  -webkit-appearance: none;  /*REMOVES DEFAULT CHROME & SAFARI STYLE*/
+  -moz-appearance: none;  /*REMOVES DEFAULT FIREFOX STYLE*/
+ 
+  -webkit-border-radius: 1rem;
+  border: 1px #e1e1e1 solid;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  padding: .1rem;
+  width: 30%;
+  cursor: pointer;
+ 
+  background: #fff url(drop-down-arrow.png) no-repeat right center;
+  background-size: 32px 32px; /*TO ACCOUNT FOR @2X IMAGE FOR RETINA */
+}
+
+select.custom-dropdown:active,
+select.custom-dropdown:hover,
+select.custom-dropdown:focus {
+  outline: 0;
+}
+
+select.custom-dropdown optgroup {
+  margin: 0.5rem;
+}
