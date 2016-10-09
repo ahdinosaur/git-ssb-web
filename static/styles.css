@@ -492,6 +492,8 @@ h3 .user-id {
 
 .ml2 { margin-left: 2rem; }
 
+.mt1 { margin-top: 0.5rem; }
+
 .float-right { float: right; }
 
 .light-grey { color: #909090; }
@@ -520,4 +522,11 @@ select.custom-dropdown:focus {
 
 select.custom-dropdown optgroup {
   margin: 0.5rem;
+}
+
+.fileLocation {
+  border: 1px #dedede solid;
+  border-bottom: none;
+  padding: 0.2rem 0.7rem;
+  background-color: #f6f6f6;
 }
