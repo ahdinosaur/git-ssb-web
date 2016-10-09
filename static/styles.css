@@ -181,6 +181,16 @@ input { border: 1px solid #eee;}
   border: 1px solid #ccc;
 }
 
+.btn.btn-primary {
+  background: #0092db;
+  border: none;
+  color: #fff;
+}
+
+.btn.btn-primary:hover {
+  background: #03a7f9;
+}
+
 .name {
   font-size: inherit;
   margin-left: 1ex;
