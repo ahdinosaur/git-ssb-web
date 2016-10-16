@@ -355,8 +355,7 @@ G.serveFile = function (req, dirs, outside) {
       cb(null, err ?
         err.code == 'ENOENT' ? this.serve404(req)
         : this.serveBuffer(500, err.message)
-      : 'if-modified-since' in req.headers &&
-        new Date(req.headers['if-modified-since']) >= stats.mtime ?
+      : u.ifModifiedSince(req, stats.mtime) ?
         pull.once([304])
       : stats.isDirectory() ?
         this.serveBuffer(403, req._t('error.DirectoryNotListable'))
