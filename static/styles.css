@@ -221,15 +221,23 @@ label {
   display: none;
 }
 
-.clone-url {
-  font-size: small;
-  border: none;
-  border-radius: 4px;
+.clone-urls {
+  white-space: nowrap;
   float: right;
+}
+
+select.custom-dropdown.clone-url-protocol {
+  border-radius: 0.5rem 0 0 0.5rem;
+  width: 5rem;
+}
+
+.clone-url {
+  font-size: 1rem;
+  border: 1px #e1e1e1 solid;
+  border-radius: 0 0.5rem 0.5rem 0;
   margin: 0;
-  margin-top: 0.2rem;
-  padding: 0 0.4rem;
-  max-width: 50%;
+  padding: .1rem;
+  width: 18rem;
 
   background-color: #eaeaea;
   color: #6f6f6f;
