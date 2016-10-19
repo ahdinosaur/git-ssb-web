@@ -228,7 +228,7 @@ label {
 
 select.custom-dropdown.clone-url-protocol {
   border-radius: 0.5rem 0 0 0.5rem;
-  width: 5rem;
+  width: 6rem;
 }
 
 .clone-url {
@@ -237,7 +237,7 @@ select.custom-dropdown.clone-url-protocol {
   border-radius: 0 0.5rem 0.5rem 0;
   margin: 0;
   padding: .1rem;
-  width: 18rem;
+  width: 17rem;
 
   background-color: #eaeaea;
   color: #6f6f6f;
