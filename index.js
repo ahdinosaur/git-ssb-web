@@ -162,11 +162,7 @@ G.listen = function (host, port) {
 G.getRepoName = function (ownerId, repoId, cb) {
   this.about.getName({
     owner: ownerId,
-    target: repoId,
-    toString: function () {
-      // hack to fit two parameters into asyncmemo
-      return ownerId + '/' + repoId
-    }
+    target: repoId
   }, cb)
 }
 
