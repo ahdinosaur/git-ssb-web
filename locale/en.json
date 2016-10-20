@@ -134,7 +134,9 @@
   "pullRequest": {
     "WantToMerge": "%{name} wants to merge commits into %{base} from %{head}",
     "Discussion": "Discussion",
-    "New": "New Pull Request"
+    "New": "New Pull Request",
+    "NoCommits": "No commits",
+    "NoChanges": "No changes"
   },
   "NameDeletedBranch": "%{name} deleted the %{branch} branch",
   "NameUpdatedBranch": "%{name} updated the branch to %{rev}",

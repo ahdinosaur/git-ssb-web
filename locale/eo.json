@@ -134,7 +134,9 @@
   "pullRequest": {
     "WantToMerge": "%{name} volas kunfandi enmetoj en %{base} de %{head}",
     "Discussion": "Priparolado",
-    "New": "Nova Tiro-peto"
+    "New": "Nova Tiro-peto",
+    "NoCommits": "Neniuj enmetoj",
+    "NoChanges": "Neniuj ŝanĝoj"
   },
   "NameDeletedBranch": "%{name} fermiĝis la %{branch} branĉon",
   "NameUpdatedBranch": "%{name} ĝisdatigis la branĉon al %{rev}",
