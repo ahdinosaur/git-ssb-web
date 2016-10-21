@@ -413,7 +413,6 @@ G.renderTry = function (read) {
         ended = true
         cb(null, self.renderError(err))
       } else
-        console.log("DATA", data) // pull-hyperscript is currently outputting .. a function?
         cb(null, data)
     })
   }

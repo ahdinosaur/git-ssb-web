@@ -12,6 +12,7 @@
     "multicb": "^1.2.1",
     "node-polyglot": "^1.0.0",
     "pull-cat": "^1.1.8",
+    "pull-cat-map": "^1.0.0",
     "pull-git-pack": "^0.2.0",
     "pull-git-repo": "^0.6.0",
     "pull-identify-filetype": "^1.1.0",
