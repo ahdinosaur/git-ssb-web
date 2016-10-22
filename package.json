@@ -15,6 +15,7 @@
     "pull-cat-map": "^1.0.0",
     "pull-git-pack": "^0.2.0",
     "pull-git-repo": "^0.6.0",
+    "pull-hyperscript": "0.0.2",
     "pull-identify-filetype": "^1.1.0",
     "pull-many": "^1.0.6",
     "pull-paramap": "^1.1.6",
