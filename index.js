@@ -560,6 +560,7 @@ G.renderFeedItem = function (req, msg, cb) {
   var self = this
   var c = msg.value.content
   var msgDate = moment(new Date(msg.value.timestamp)).fromNow()
+  var msgDateLink = u.link([msg.key], msgDate, false, 'class="date"')
   var author = msg.value.author
   var authorLink = u.link([msg.value.author], msg.authorName)
   switch (c.type) {
@@ -576,7 +577,7 @@ G.renderFeedItem = function (req, msg, cb) {
                 name: authorLink,
                 upstream: u.link([c.upstream], upstreamName),
                 repo: u.link([msg.key], repoName)
-              }) + ' <span class="date">' + msgDate + '</span></section>')
+              }) + ' ' + msgDateLink + '</section>')
           })
         })
       } else {
@@ -587,7 +588,7 @@ G.renderFeedItem = function (req, msg, cb) {
             req._t('CreatedRepo', {
               name: authorLink,
               repo: repoLink
-            }) + ' <span class="date">' + msgDate + '</span></section>')
+            }) + ' ' + msgDateLink + '</section>')
         })
       }
     case 'git-update':
@@ -598,7 +599,7 @@ G.renderFeedItem = function (req, msg, cb) {
           req._t('Pushed', {
             name: authorLink,
             repo: repoLink
-          }) + ' <span class="date">' + msgDate + '</span></section>')
+          }) + ' ' + msgDateLink + '</section>')
       })
     case 'issue':
     case 'pull-request':
@@ -617,7 +618,7 @@ G.renderFeedItem = function (req, msg, cb) {
                   'pull request' : 'issue.'),
                 title: issueLink,
                 project: repoLink
-              }) + ' <span class="date">' + msgDate + '</span></section>')
+              }) + ' ' + msgDateLink + '</section>')
           })
       })
     case 'about':
