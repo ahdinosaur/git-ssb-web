@@ -2,7 +2,10 @@
 
 A web interface for git repos on [ssb][secure-scuttlebutt].
 
-Public demo: <https://git-ssb.celehner.com/>
+Public installations:
+
+- https://gitmx.com/
+- https://git-ssb.celehner.com/
 
 ## Install
 ```
@@ -41,7 +44,7 @@ Options:
 
 ## License
 
-Copyright (c) 2016 Charles Lehner
+Copyright (c) 2016 Charles Lehner and contributors
 
 Usage of the works is permitted provided that this instrument is
 retained with the works, so that any entity that uses the works is
