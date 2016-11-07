@@ -6,6 +6,10 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+* {
+  word-break: break-word;
+}
+
 article, header {
   width: 100%;
   margin-left: auto;
