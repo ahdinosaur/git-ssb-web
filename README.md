@@ -6,6 +6,7 @@ Public installations:
 
 - https://gitmx.com/
 - https://git-ssb.celehner.com/
+- http://git.mixmix.io/
 
 ## Install
 ```
