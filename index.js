@@ -791,11 +791,10 @@ G.serveSearch = function (req) {
   var search = new RegExp(q, 'i')
   return this.serveTemplate(req, req._t('Search') + ' &middot; ' + q, 200)(
     this.renderFeed(req, null, function (opts) {
-      opts.type == 'about'
       return function (read) {
         return pull(
           many([
-            self.getRepoNames(opts),
+            self.getMsgs('about', opts),
             read
           ]),
           pull.filter(function (msg) {
@@ -812,19 +811,13 @@ G.serveSearch = function (req) {
   )
 }
 
-G.getRepoNames = function (opts) {
-  return pull(
-    this.ssb.messagesByType({
-      type: 'about',
-      reverse: opts.reverse,
-      lt: opts.lt,
-      gt: opts.gt,
-    }),
-    pull.filter(function (msg) {
-      return '%' == String(msg.value.content.about)[0]
-        && msg.value.content.name
-    })
-  )
+G.getMsgs = function (type, opts) {
+  return this.ssb.messagesByType({
+    type: type,
+    reverse: opts.reverse,
+    lt: opts.lt,
+    gt: opts.gt,
+  })
 }
 
 G.serveBlobNotFound = function (req, repoId, err) {
