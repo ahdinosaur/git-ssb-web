@@ -11,15 +11,11 @@ body {
 }
 
 article, header {
-  width: 100%;
+  width: 777px;
+  min-width: 60%;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
-}
-
-@media (min-width: 600px) {
-  article, header { 
-    width: 60%; 
-  }
 }
 
 pre {
