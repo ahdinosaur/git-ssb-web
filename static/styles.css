@@ -563,12 +563,20 @@ select.custom-dropdown {
   border: 1px #e1e1e1 solid;
   border-radius: 0.5rem;
   font-size: 1rem;
-  padding: .1rem;
+  padding: .125rem;
   width: 30%;
   cursor: pointer;
  
   background: #fff url(drop-down-arrow.png) no-repeat right center;
   background-size: 32px 32px; /*TO ACCOUNT FOR @2X IMAGE FOR RETINA */
+}
+
+/* Fix select padding in Firefox.
+ * https://bugzilla.mozilla.org/show_bug.cgi?id=382142 */
+@-moz-document url-prefix() {
+  select.custom-dropdown {
+    padding: .05rem;
+  }
 }
 
 select.custom-dropdown:active,
