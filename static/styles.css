@@ -97,6 +97,10 @@ section.branch-info, section.files {
   border: none;
 }
 
+.missing-blobs-warning {
+  color: black;
+}
+
 section.readme {
   margin-top: 2em;
   padding: 2em 2em 4em;

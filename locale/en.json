@@ -160,5 +160,6 @@
     "TooLarge": "The diff is too large to show. Use a local git client to view these changes.",
     "OldFileSize": "Old file size: %{bytes} bytes",
     "NewFileSize": "New file size: %{bytes} bytes"
-  }
+  },
+  "missingBlobsWarning": "Missing blobs for latest %{smart_count} update. Showing old state |||| Missing blobs for latest %{smart_count} updates. Showing old state"
 }

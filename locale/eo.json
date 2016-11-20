@@ -155,5 +155,6 @@
     "MergeViaCmdLine": "Kunfandu laŭ komandlinio…",
     "CheckOut": "Elŝuti la branĉo kaj testu ŝanĝojn:",
     "MergeAndPush": "Kunfandu ŝanĝojn kaj tiru por ĝisdatigi la bazo branĉo:"
-  }
+  },
+  "missingBlobsWarning": "Mankas blob-oj por lasta %{smart_count} ĝisdatigo. Montrado de malnova stato. |||| Mankas blob-oj por lasta %{smart_count} ĝisdatigoj. Montrado de malnova stato."
 }
