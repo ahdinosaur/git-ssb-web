@@ -145,6 +145,12 @@ section img {
   max-width: 100%;
 }
 
+.emoji {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+}
+
 /* repo page */
 
 .repo-title {

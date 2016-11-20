@@ -26,6 +26,7 @@ var mime = require('mime-types')
 var moment = require('moment')
 
 var hlCssPath = path.resolve(require.resolve('highlight.js'), '../../styles')
+var emojiPath = path.resolve(require.resolve('emoji-named-characters'), '../pngs')
 
 function ParamError(msg) {
   var err = Error.call(this, msg)
@@ -237,6 +238,8 @@ G.handleRequest = function (req) {
     return this.serveFile(req, dirs)
   else if (dir == 'highlight')
     return this.serveFile(req, [hlCssPath].concat(dirs.slice(1)), true)
+  else if (dir == 'emoji')
+    return this.serveFile(req, [emojiPath].concat(dirs.slice(1)), true)
   else
     return this.serve404(req)
 }
