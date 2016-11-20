@@ -93,6 +93,10 @@ section.branch-info, section.files {
   border: none;
 }
 
+.rev-menu-line {
+  clear: both;
+}
+
 .missing-blobs-warning {
   color: black;
 }
