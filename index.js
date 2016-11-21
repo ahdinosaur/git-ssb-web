@@ -24,6 +24,7 @@ var many = require('pull-many')
 var ident = require('pull-identify-filetype')
 var mime = require('mime-types')
 var moment = require('moment')
+var LRUCache = require('lrucache')
 
 var hlCssPath = path.resolve(require.resolve('highlight.js'), '../../styles')
 var emojiPath = path.resolve(require.resolve('emoji-named-characters'), '../pngs')
@@ -114,10 +115,12 @@ function GitSSBWeb(ssb, config, reconnect) {
   this.ssbAppname = config.appname || 'ssb'
   this.isPublic = config.public
   this.getVotes = require('./lib/votes')(ssb)
-  this.getMsg = asyncMemo(ssb.get)
+  this.getMsg = asyncMemo({cache: new LRUCache(100)}, ssb.get)
   this.issues = Issues.init(ssb)
   this.pullReqs = PullRequests.init(ssb)
-  this.getRepo = asyncMemo(function (id, cb) {
+  this.getRepo = asyncMemo({
+    cache: new LRUCache(32)
+  }, function (id, cb) {
     this.getMsg(id, function (err, msg) {
       if (err) return cb(err)
       ssbGit.getRepo(ssb, {key: id, value: msg}, {live: true}, cb)

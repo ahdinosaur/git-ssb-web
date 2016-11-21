@@ -4,10 +4,11 @@
   "description": "web server for browsing git repos on ssb",
   "bin": "server.js",
   "dependencies": {
-    "asyncmemo": "^0.1.0",
+    "asyncmemo": "^1.0.0",
     "diff": "^2.2.3",
     "emoji-named-characters": "^1.0.2",
     "highlight.js": "^9.2.0",
+    "lrucache": "^1.0.2",
     "mime-types": "^2.1.12",
     "moment": "^2.14.1",
     "multicb": "^1.2.1",
