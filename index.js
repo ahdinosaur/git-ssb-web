@@ -449,7 +449,7 @@ G.serveTemplate = function (req, title, code, read) {
       self.about(self.myId, function (err, about) {
         if (err) return cb(err)
         cb(null,
-          '<a href="' + u.encodeLink(this.myId) + '">' +
+          '<a href="' + u.encodeLink(self.myId) + '">' +
             (about.image ?
               '<img class="profile-icon icon-right"' +
               ' src="/' + encodeURIComponent(about.image) + '"' +
