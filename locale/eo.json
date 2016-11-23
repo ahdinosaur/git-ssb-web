@@ -51,7 +51,9 @@
   "Code": "Kodo",
   "Commits": "Enmetoj",
   "Issues": "Temoj",
+  "IssuesN": "Temoj (%{count})",
   "PullRequests": "Tiro-petoj",
+  "PullRequestsN": "Tiro-petoj (%{count})",
   "initRepo": {
     "GettingStarted": "Rudimentoj",
     "CreateNew": "Krei novan deponejon",

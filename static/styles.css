@@ -240,7 +240,7 @@ label {
   float: right;
   display: block;
   position: relative;
-  width: 23rem;
+  width: 21rem;
   max-width: 100%;
   min-width: 3rem;
   height: 1.5rem;
@@ -248,14 +248,14 @@ label {
 
 select.custom-dropdown.clone-url-protocol {
   border-radius: 0.5rem 0 0 0.5rem;
-  width: 5.5rem;
+  width: 5rem;
   position: absolute;
   left: 0;
 }
 
 .clone-url-wrapper {
   position: absolute;
-  left: 5.5rem;
+  left: 5rem;
   right: 0;
 }
 

@@ -51,7 +51,9 @@
   "Code": "Code",
   "Commits": "Commits",
   "Issues": "Issues",
+  "IssuesN": "Issues (%{count})",
   "PullRequests": "Pull Requests",
+  "PullRequestsN": "Pull Requests (%{count})",
   "initRepo": {
     "GettingStarted": "Getting started",
     "CreateNew": "Create a new repository",
