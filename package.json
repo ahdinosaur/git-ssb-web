@@ -15,7 +15,7 @@
     "node-polyglot": "^1.0.0",
     "pull-cat": "^1.1.11",
     "pull-git-pack": "^1.0.0",
-    "pull-git-repo": "^1.0.0",
+    "pull-git-repo": "^1.0.1",
     "pull-hyperscript": "^0.2.2",
     "pull-identify-filetype": "^1.1.0",
     "pull-many": "^1.0.8",
