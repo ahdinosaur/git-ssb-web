@@ -440,7 +440,7 @@ G.serveTemplate = function (req, title, code, read) {
         'Content-Type': 'text/html'
       }],
       '<!doctype html><html><head><meta charset=utf-8>',
-      '<title>' + (title || app) + '</title>',
+      '<title>' + app + (title != undefined ? ' - ' + title : '') + '</title>',
       '<link rel=stylesheet href="/static/styles.css"/>',
       '<link rel=stylesheet href="/highlight/foundation.css"/>',
       '</head>\n',
