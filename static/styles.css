@@ -70,7 +70,7 @@ header .search-bar {
 .profile-icon {
   height: 1.6em;
   width: 1.6em;
-  margin: .4em 0 .5em .15em;
+  margin: .4em .2em .5em .15em;
   border: 1px solid #eee;
   float: left;
 }
