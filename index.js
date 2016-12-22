@@ -635,7 +635,7 @@ G.renderFeedItem = function (req, msg, cb) {
           author: authorLink,
           target: '<tt>' + u.escape(c.about) + '</tt>',
           name: u.link([c.about], c.name)
-        }) + '</section>')
+        }) + ' ' + msgDateLink + '</section>')
     case 'post':
       return this.pullReqs.get(c.issue, function (err, pr) {
         if (err) return cb(err)
@@ -648,7 +648,7 @@ G.renderFeedItem = function (req, msg, cb) {
             name: authorLink,
             type: req._t(type),
             title: u.link([pr.id], pr.title, true)
-          }) +
+          }) + ' ' + msgDateLink +
           (c.text ? '<blockquote>' + markdown(c.text) + '</blockquote>' : '') +
           '</section>')
       })
