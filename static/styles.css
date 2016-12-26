@@ -139,6 +139,7 @@ i {
   font-family: Symbola, 'Apple Color Emoji', 'Android Emoji',
     'Segoe UI Symbol', 'DejaVu Sans', sans-serif;
   font-style: inherit;
+  word-break: normal;
 }
 
 section img {
