@@ -212,11 +212,10 @@ function G_onRequest(req, res) {
   var locale = req._u.query.locale ||
     (/locale=([^;]*)/.exec(req.headers.cookie) || [])[1]
   var reqLocales = req.headers['accept-language']
-  var locales = String(reqLocales).split(/, */).map(function (item) {
+  var locales = reqLocales ? reqLocales.split(/, */).map(function (item) {
     return item.split(';')[0]
-  })
-  if (locales)
-    req._locale = locales[0]
+  }) : []
+  req._locale = locales[0] || locale || this.i18n.fallback
 
   this.i18n.pickCatalog(reqLocales, locale, function (err, t) {
     if (err) return pull(this.serveError(req, err, 500), serve(req, res))
