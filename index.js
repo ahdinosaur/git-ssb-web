@@ -577,6 +577,7 @@ G.renderFeedItem = function (req, msg, cb) {
   var msgDateLink = u.link([msg.key], msgDate, false, 'class="date"')
   var author = msg.value.author
   var authorLink = u.link([msg.value.author], msg.authorName)
+  var privateIconMaybe = msg.value.private ? ' ' + u.privateIcon(req) : ''
   switch (c.type) {
     case 'git-repo':
       var done = multicb({ pluck: 1, spread: true })
@@ -591,7 +592,7 @@ G.renderFeedItem = function (req, msg, cb) {
                 name: authorLink,
                 upstream: u.link([c.upstream], upstreamName),
                 repo: u.link([msg.key], repoName)
-              }) + ' ' + msgDateLink + '</section>')
+              }) + ' ' + msgDateLink + privateIconMaybe + '</section>')
           })
         })
       } else {
@@ -602,7 +603,7 @@ G.renderFeedItem = function (req, msg, cb) {
             req._t('CreatedRepo', {
               name: authorLink,
               repo: repoLink
-            }) + ' ' + msgDateLink +
+            }) + ' ' + msgDateLink + privateIconMaybe +
             (msg.value.private ?
               '<br>' + req._t('repo.Recipients') + '<ul>' +
               (Array.isArray(c.recps) ? c.recps : []).map(function (feed) {
@@ -620,7 +621,7 @@ G.renderFeedItem = function (req, msg, cb) {
           req._t('Pushed', {
             name: authorLink,
             repo: repoLink
-          }) + ' ' + msgDateLink + '</section>')
+          }) + ' ' + msgDateLink + privateIconMaybe + '</section>')
       })
     case 'issue':
     case 'pull-request':
@@ -639,7 +640,7 @@ G.renderFeedItem = function (req, msg, cb) {
                   'pull request' : 'issue.'),
                 title: issueLink,
                 project: repoLink
-              }) + ' ' + msgDateLink + '</section>')
+              }) + ' ' + msgDateLink + privateIconMaybe + '</section>')
           })
       })
     case 'about':
@@ -648,7 +649,7 @@ G.renderFeedItem = function (req, msg, cb) {
           author: authorLink,
           target: '<tt>' + u.escape(c.about) + '</tt>',
           name: u.link([c.about], c.name)
-        }) + ' ' + msgDateLink + '</section>')
+        }) + ' ' + msgDateLink + privateIconMaybe + '</section>')
     case 'post':
       return this.pullReqs.get(c.issue, function (err, pr) {
         if (err) return cb(err)
@@ -661,7 +662,7 @@ G.renderFeedItem = function (req, msg, cb) {
             name: authorLink,
             type: req._t(type),
             title: u.link([pr.id], pr.title, true)
-          }) + ' ' + msgDateLink +
+          }) + ' ' + msgDateLink + privateIconMaybe +
           (c.text ? '<blockquote>' + markdown(c.text) + '</blockquote>' : '') +
           '</section>')
       })
