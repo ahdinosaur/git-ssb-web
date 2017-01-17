@@ -45,7 +45,10 @@
   "Forks": "Forks",
   "Rename": "Rename",
   "repo": {
-    "Rename": "Rename the repo"
+    "Rename": "Rename the repo",
+    "Private": "Private",
+    "RepoIsPrivate": "This repo is private",
+    "Recipients": "Recipients:"
   },
   "ForkedFrom": "forked from %{repo}",
   "Code": "Code",

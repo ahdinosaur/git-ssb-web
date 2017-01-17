@@ -45,7 +45,10 @@
   "Forks": "Forkoj",
   "Rename": "Renomigi",
   "repo": {
-    "Rename": "Alinomi la deponejon"
+    "Rename": "Alinomi la deponejon",
+    "Private": "Private",
+    "RepoIsPrivate": "Tiu ĉi deponejo estas privata",
+    "Recipients": "Ricevonto:"
   },
   "ForkedFrom": "forkis el %{repo}",
   "Code": "Kodo",

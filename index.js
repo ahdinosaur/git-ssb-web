@@ -115,7 +115,7 @@ function GitSSBWeb(ssb, config, reconnect) {
   this.ssbAppname = config.appname || 'ssb'
   this.isPublic = config.public
   this.getVotes = require('./lib/votes')(ssb)
-  this.getMsg = asyncMemo({cache: new LRUCache(100)}, ssb.get)
+  this.getMsg = asyncMemo({cache: new LRUCache(100)}, this.getMsgRaw)
   this.issues = Issues.init(ssb)
   this.pullReqs = PullRequests.init(ssb)
   this.getRepo = asyncMemo({
@@ -123,7 +123,7 @@ function GitSSBWeb(ssb, config, reconnect) {
   }, function (id, cb) {
     this.getMsg(id, function (err, msg) {
       if (err) return cb(err)
-      ssbGit.getRepo(ssb, {key: id, value: msg}, {live: true}, cb)
+      ssbGit.getRepo(ssb, msg, {live: true}, cb)
     })
   })
 
@@ -524,6 +524,8 @@ G.renderFeed = function (req, feedId, filter) {
   }
   return pull(
     feedId ? this.ssb.createUserStream(opts) : this.ssb.createFeedStream(opts),
+    u.decryptMessages(this.ssb),
+    u.readableMessages(),
     pull.filter(function (msg) {
       var c = msg.value.content
       return c.type in msgTypes
@@ -582,7 +584,7 @@ G.renderFeedItem = function (req, msg, cb) {
       if (c.upstream) {
         return self.getMsg(c.upstream, function (err, upstreamMsg) {
           if (err) return cb(null, self.serveError(req, err))
-          self.getRepoName(upstreamMsg.author, c.upstream, done())
+          self.getRepoName(upstreamMsg.value.author, c.upstream, done())
           done(function (err, repoName, upstreamName) {
             cb(null, '<section class="collapse">' +
               req._t('Forked', {
@@ -600,7 +602,14 @@ G.renderFeedItem = function (req, msg, cb) {
             req._t('CreatedRepo', {
               name: authorLink,
               repo: repoLink
-            }) + ' ' + msgDateLink + '</section>')
+            }) + ' ' + msgDateLink +
+            (msg.value.private ?
+              '<br>' + req._t('repo.Recipients') + '<ul>' +
+              (Array.isArray(c.recps) ? c.recps : []).map(function (feed) {
+                return '<li>' + u.link([feed], feed) + '</li>'
+              }).join('') + '</ul>'
+            : '') +
+          '</section>')
         })
       }
     case 'git-update':
@@ -619,7 +628,7 @@ G.renderFeedItem = function (req, msg, cb) {
       return self.getMsg(c.project, function (err, projectMsg) {
         if (err) return cb(null,
           self.repos.serveRepoNotFound(req, c.repo, err))
-        self.getRepoName(projectMsg.author, c.project,
+        self.getRepoName(projectMsg.value.author, c.project,
           function (err, repoName) {
             if (err) return cb(err)
             var repoLink = u.link([c.project], repoName)
@@ -672,9 +681,9 @@ G.serveIndex = function (req) {
 G.serveMessage = function (req, id, path) {
   var self = this
   return u.readNext(function (cb) {
-    self.ssb.get(id, function (err, msg) {
+    self.getMsg(id, function (err, msg) {
       if (err) return cb(null, self.serveError(req, err))
-      var c = msg.content || {}
+      var c = msg && msg.value && msg.value.content || {}
       switch (c.type) {
         case 'git-repo':
           return self.getRepo(id, function (err, repo) {
@@ -686,7 +695,7 @@ G.serveMessage = function (req, id, path) {
             if (err) return cb(null,
               self.repos.serveRepoNotFound(req, c.repo, err))
             cb(null, self.repos.serveRepoUpdate(req,
-              GitRepo(repo), id, msg, path))
+              GitRepo(repo), msg, path))
           })
         case 'issue':
           return self.getRepo(c.project, function (err, repo) {
@@ -742,13 +751,14 @@ G.serveMessage = function (req, id, path) {
           } else if (ref.isMsgId(c.root)) {
             // comment on issue from patchwork?
             return self.getMsg(c.root, function (err, root) {
+              var rc = root.value && root.value.content && root.value.content
               if (err) return cb(null, self.serveError(req, err))
-              var repoId = root.content.repo || root.content.project
+              var repoId = rc.repo || rc.project
               if (!ref.isMsgId(repoId))
-                return cb(null, self.serveGenericMessage(req, id, msg, path))
+                return cb(null, self.serveGenericMessage(req, msg, path))
               self.getRepo(repoId, function (err, repo) {
                 if (err) return cb(null, self.serveError(req, err))
-                switch (root.content && root.content.type) {
+                switch (rc && rc.type) {
                   case 'issue':
                     return self.issues.get(c.root, function (err, issue) {
                       if (err) return cb(null, self.serveError(req, err))
@@ -777,16 +787,16 @@ G.serveMessage = function (req, id, path) {
                 GitRepo(repo), id, msg, path))
             })
           else
-            return cb(null, self.serveGenericMessage(req, id, msg, path))
+            return cb(null, self.serveGenericMessage(req, msg, path))
       }
     })
   })
 }
 
-G.serveGenericMessage = function (req, id, msg, path) {
-  return this.serveTemplate(req, id)(pull.once(
-    '<section><h2>' + u.link([id]) + '</h2>' +
-    u.json(msg) +
+G.serveGenericMessage = function (req, msg, path) {
+  return this.serveTemplate(req, msg.key)(pull.once(
+    '<section><h2>' + u.link([msg.key]) + '</h2>' +
+    u.json(msg.value) +
     '</section>'))
 }
 
@@ -821,6 +831,14 @@ G.serveSearch = function (req) {
       }
     })
   )
+}
+
+G.getMsgRaw = function (key, cb) {
+  var self = this
+  this.ssb.get(key, function (err, value) {
+    if (err) return cb(err)
+    u.decryptMessage(self.ssb, {key: key, value: value}, cb)
+  })
 }
 
 G.getMsgs = function (type, opts) {
