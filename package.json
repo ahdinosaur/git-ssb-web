@@ -19,6 +19,7 @@
     "pull-hyperscript": "^0.2.2",
     "pull-identify-filetype": "^1.1.0",
     "pull-many": "^1.0.8",
+    "pull-paginate": "^1.0.0",
     "pull-paramap": "^1.2.1",
     "pull-stream": "^3.5.0",
     "remove-markdown": "^0.1.0",
