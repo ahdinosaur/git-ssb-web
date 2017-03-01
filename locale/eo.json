@@ -71,7 +71,7 @@
   "PushedObjects": "Puŝis %{smart_count} objektoj |||| Puŝis %{smart_count} objekto",
   "AuthoredOn": "%{name} aŭtoris je %{date}",
   "CommittedOn": "%{name} enmetis je %{date}",
-  "AuthorReleasedCommit": "%{name} aŭtoris {commitName}",
+  "AuthorReleasedCommit": "%{name} aŭtoris %{commitName}",
   "CommitterReleasedCommit": "%{name} enmetis %{commitName}",
   "TaggedOn": "%{name} etikedis je %{date}",
   "Branches": "Branĉoj",
