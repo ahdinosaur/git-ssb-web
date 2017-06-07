@@ -875,10 +875,14 @@ G.serveRaw = function (length, contentType) {
 
 G.getBlob = function (req, key, cb) {
   var blobs = this.ssb.blobs
-  blobs.want(key, function (err, got) {
-    if (err) cb(err)
-    else if (!got) cb(new Error(req._t('error.MissingBlob', {key: key})))
-    else cb(null, blobs.get(key))
+  // use size to check for blob's presence, since has or want may broadcast
+  blobs.size(key, function (err, size) {
+    if (typeof size === 'number') cb(null, blobs.get(key))
+    else blobs.want(key, function (err, got) {
+      if (err) cb(err)
+      else if (!got) cb(new Error(req._t('error.MissingBlob', {key: key})))
+      else cb(null, blobs.get(key))
+    })
   })
 }
 
