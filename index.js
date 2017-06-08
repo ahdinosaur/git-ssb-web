@@ -127,9 +127,12 @@ function GitSSBWeb(ssb, config) {
   this.users = require('./lib/users')(this)
   this.repos = require('./lib/repos')(this)
 
-  this.indexCache = require('./lib/index-cache')(ssb)
-
   var webConfig = config['git-ssb-web'] || {}
+
+  if (webConfig.computeIssueCounts !== false) {
+    this.indexCache = require('./lib/index-cache')(ssb)
+  }
+
   var addr = parseAddr(config.listenAddr, {
     host: webConfig.host || 'localhost',
     port: webConfig.port || 7718

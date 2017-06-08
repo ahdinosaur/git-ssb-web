@@ -32,6 +32,19 @@ Options:
 - `--public`: make the app read-only (e.g. disable making digs), to make it
   suitable for serving publicly
 
+## Config
+
+`~/.ssb/config`:
+{
+  "git-ssb-web": {
+    "host": "127.0.0.1",
+    "port": 7718,
+    "computeIssueCounts": true
+  }
+}
+
+Set `computeIssueCounts` to `false` for faster start up.
+
 ## Screenshots
 
 ![screenshot of a user's activity](static/screenshot-user-activity.png)
