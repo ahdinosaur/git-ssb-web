@@ -86,29 +86,19 @@ var msgTypes = {
   'pull-request': true
 }
 
-var _httpServer
-
 module.exports = {
   name: 'git-ssb-web',
   version: require('./package').version,
   manifest: {},
-  init: function (ssb, config, reconnect) {
-    // close existing server. when scuttlebot plugins get a deinit method, we
-    // will close it in that instead it
-    if (_httpServer)
-      _httpServer.close()
-
-    var web = new GitSSBWeb(ssb, config, reconnect)
-    _httpSserver = web.httpServer
-
+  init: function (ssb, config) {
+    var web = new GitSSBWeb(ssb, config)
     return {}
   }
 }
 
-function GitSSBWeb(ssb, config, reconnect) {
+function GitSSBWeb(ssb, config) {
   this.ssb = ssb
   this.config = config
-  this.reconnect = reconnect
 
   if (config.logging && config.logging.level)
     this.logLevel = this.logLevels.indexOf(config.logging.level)
@@ -145,6 +135,8 @@ function GitSSBWeb(ssb, config, reconnect) {
     port: webConfig.port || 7718
   })
   this.listen(addr.host, addr.port)
+
+  this.monitorSsbClient()
 }
 
 var G = GitSSBWeb.prototype
@@ -479,8 +471,6 @@ G.serveTemplate = function (req, title, code, read) {
 }
 
 G.serveError = function (req, err, status) {
-  if (err.message == 'stream is closed')
-    this.reconnect && this.reconnect()
   return pull(
     pull.once(this.renderError(err, 'h2')),
     this.serveTemplate(req, err.name, status || 500)
@@ -924,4 +914,20 @@ function identToResp(read) {
     else
       id(null, cb)
   }
+}
+
+G.monitorSsbClient = function () {
+  pull(
+    function (abort, cb) {
+      if (abort) throw abort
+      // leave the stream open
+    },
+    this.ssb.gossip.ping(),
+    pull.drain(null, function (err) {
+      // exit when the rpc connection ends
+      if (err) console.error(err)
+      console.error('sbot client connection closed. aborting')
+      process.exit(1)
+    })
+  )
 }

@@ -32,7 +32,6 @@
     "ssb-mentions": "^0.1.0",
     "ssb-msg-schemas": "^6.1.1",
     "ssb-pull-requests": "^1.0.0",
-    "ssb-reconnect": "^0.1.1",
     "ssb-ref": "^2.6.2",
     "stream-to-pull-stream": "^1.7.2"
   },

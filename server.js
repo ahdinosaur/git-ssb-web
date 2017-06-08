@@ -15,9 +15,7 @@ var Web = require('.')
 config.listenAddr = config._[1]
 config.appname = appName
 
-require('ssb-reconnect')(function (cb) {
-  ssbClient(keys, config, cb)
-}, function (err, ssb, reconnect) {
+ssbClient(keys, config, function (err, ssb) {
   if (err) throw err
-  Web.init(ssb, config, reconnect)
+  Web.init(ssb, config)
 })
