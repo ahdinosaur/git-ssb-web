@@ -112,6 +112,7 @@ function GitSSBWeb(ssb, config) {
     cache: new LRUCache(32)
   }, function (id, cb) {
     this.getMsg(id, function (err, msg) {
+      if (msg.private && this.isPublic) return cb(new Error('Private Repo'))
       if (err) return cb(err)
       ssbGit.getRepo(ssb, msg, {live: true}, cb)
     })
