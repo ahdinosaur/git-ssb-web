@@ -930,7 +930,9 @@ G.monitorSsbClient = function () {
   pull(
     function (abort, cb) {
       if (abort) throw abort
-      // leave the stream open
+      setTimeout(function () {
+        cb(null, 'keepalive')
+      }, 15e3)
     },
     this.ssb.gossip.ping(),
     pull.drain(null, function (err) {
