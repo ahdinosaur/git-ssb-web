@@ -134,6 +134,8 @@ function GitSSBWeb(ssb, config) {
     this.indexCache = require('./lib/index-cache')(ssb)
   }
 
+  this.serveAcmeChallenge = require('./lib/acme-challenge')(ssb)
+
   var addr = parseAddr(config.listenAddr, {
     host: webConfig.host || 'localhost',
     port: webConfig.port || 7718
@@ -204,6 +206,10 @@ function serve(req, res) {
 
 function G_onRequest(req, res) {
   this.log('info', req.method, req.url)
+
+  if (req.url.startsWith('/.well-known/acme-challenge'))
+    return this.serveAcmeChallenge(req, res)
+
   req._u = url.parse(req.url, true)
   var locale = req._u.query.locale ||
     (/locale=([^;]*)/.exec(req.headers.cookie) || [])[1]
