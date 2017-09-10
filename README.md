@@ -9,6 +9,9 @@ Public installations:
 - http://git.mixmix.io/
 
 ## Install
+
+NOTE: If you are running a modern version of Patchwork or Scuttlebot, `git-ssb-web` will **automatically be available at [http://localhost:7718](http://localhost:7718)** and **you do not have to install it yourself**.
+
 ```
 npm install -g git-ssb-web
 ```
