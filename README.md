@@ -26,7 +26,7 @@ npm install -g git-ssb
 NOTE: If you are running a modern version of Patchwork or Scuttlebot, and have installed `git-ssb-web`, it will **automatically be available at [http://localhost:7718](http://localhost:7718)** whenever you run SSB, and you do not need to start it separately.
 
 ```
-git-ssb-web [<options>] [<host:port>]
+git ssb web [<options>] [<host:port>]
 ```
 - `host`: hostname to listen on. defaults to `localhost`.
 - `port`: port to listen on. defaults to `7718`.
