@@ -111,9 +111,10 @@ function GitSSBWeb(ssb, config) {
   this.getRepo = asyncMemo({
     cache: new LRUCache(32)
   }, function (id, cb) {
+    if (id[0] === '#') return ssbGit.getRepo(ssb, id, {live: true}, cb)
     this.getMsg(id, function (err, msg) {
-      if (msg.private && this.isPublic) return cb(new Error('Private Repo'))
       if (err) return cb(err)
+      if (msg.private && this.isPublic) return cb(new Error('Private Repo'))
       ssbGit.getRepo(ssb, msg, {live: true}, cb)
     })
   })
@@ -164,6 +165,8 @@ G.listen = function (host, port) {
 }
 
 G.getRepoName = function (ownerId, repoId, cb) {
+  if (!repoId) return cb(null, '?')
+  if (repoId[0] === '#') return cb(null, repoId)
   this.about.getName({
     owner: ownerId,
     target: repoId
@@ -239,6 +242,8 @@ G.handleRequest = function (req) {
     return this.serveIndex(req)
   else if (dir == 'search')
     return this.serveSearch(req)
+  else if (dir[0] === '#')
+    return this.serveChannel(req, dir, dirs.slice(1))
   else if (ref.isBlobId(dir))
     return this.serveBlob(req, dir)
   else if (ref.isMsgId(dir))
@@ -626,6 +631,7 @@ G.renderFeedItem = function (req, msg, cb) {
     case 'issue':
     case 'pull-request':
       var issueLink = u.link([msg.key], u.messageTitle(msg))
+      // TODO: handle hashtag in project property
       return self.getMsg(c.project, function (err, projectMsg) {
         if (err) return cb(null,
           self.repos.serveRepoNotFound(req, c.repo, err))
@@ -677,7 +683,15 @@ G.serveIndex = function (req) {
   return this.serveTemplate(req)(this.renderFeed(req))
 }
 
-/* Message */
+G.serveChannel = function (req, id, path) {
+  var self = this
+  return u.readNext(function (cb) {
+    self.getRepo(id, function (err, repo) {
+      if (err) return cb(null, self.serveError(req, err))
+      cb(null, self.repos.serveRepoPage(req, GitRepo(repo), path))
+    })
+  })
+}
 
 G.serveMessage = function (req, id, path) {
   var self = this
