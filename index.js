@@ -328,6 +328,44 @@ G.handlePOST = function (req, dir) {
           cb(null, self.serveRedirect(req, req.url))
         })
 
+      case 'line-comment':
+        if (!data.repo)
+          return cb(null, self.serveError(req,
+            new ParamError('missing repo id'), 400))
+        if (!data.commitId)
+          return cb(null, self.serveError(req,
+            new ParamError('missing commit id'), 400))
+        if (!data.filePath)
+          return cb(null, self.serveError(req,
+            new ParamError('missing file path'), 400))
+        if (!data.line)
+          return cb(null, self.serveError(req,
+            new ParamError('missing line number'), 400))
+        var lineNumber = Number(data.line)
+        if (isNaN(lineNumber))
+          return cb(null, self.serveError(req,
+            new ParamError('bad line number'), 400))
+        var repoBranches = data.repoBranch
+          ? data.repoBranch.split(',') : ''
+        var msg = {
+          type: 'line-comment',
+          text: data.text,
+          repo: data.repo,
+          repoBranch: repoBranches,
+          commitId: data.commitId,
+          filePath: data.filePath,
+          line: lineNumber,
+        }
+        msg.issue = data.issue
+        var mentions = Mentions(data.text)
+        if (mentions.length)
+          msg.mentions = mentions
+        return cb(null, self.serveBuffer(200, JSON.stringify(msg, 0, 2)))
+        return self.ssb.publish(msg, function (err) {
+          if (err) return cb(null, self.serveError(req, err))
+          cb(null, self.serveRedirect(req, req.url))
+        })
+
       case 'new-issue':
         var msg = Issues.schemas.new(dir, data.text)
         var mentions = Mentions(data.text)

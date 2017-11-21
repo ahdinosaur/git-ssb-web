@@ -131,6 +131,7 @@
     "MentionedIn": "%{name} menciis tiun %{type} en %{post}",
     "Renamed": "%{author} renomiĝis tiun %{type} al %{name}",
     "Comment": "Komenti",
+    "LineComment": "Linio-Komenti",
     "Close": "Fermi %{type}",
     "CommentAndClose": "Komenti kaj Fermi",
     "Reopen": "Remalfermi %{type}",

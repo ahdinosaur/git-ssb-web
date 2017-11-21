@@ -131,6 +131,7 @@
     "MentionedIn": "%{name} mentioned this %{type} in %{post}",
     "Renamed": "%{author} renamed this %{type} to %{name}",
     "Comment": "Comment",
+    "LineComment": "Line Comment",
     "Close": "Close %{type}",
     "CommentAndClose": "Comment and Close",
     "Reopen": "Reopen %{type}",
