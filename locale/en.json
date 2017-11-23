@@ -137,6 +137,7 @@
     "Reopen": "Reopen %{type}",
     "CommentAndReopen": "Comment and Reopen"
   },
+  "Reply": "Reply",
   "pullRequest": {
     "WantToMerge": "%{name} wants to merge commits into %{base} from %{head}",
     "Discussion": "Discussion",

@@ -137,6 +137,7 @@
     "Reopen": "Remalfermi %{type}",
     "CommandAndReopen": "Komenti kaj Remalfermi"
   },
+  "Reply": "Reply",
   "pullRequest": {
     "WantToMerge": "%{name} volas kunfandi enmetoj en %{base} de %{head}",
     "Discussion": "Priparolado",

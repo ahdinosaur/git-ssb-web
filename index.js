@@ -335,6 +335,9 @@ G.handlePOST = function (req, dir) {
         if (!data.commitId)
           return cb(null, self.serveError(req,
             new ParamError('missing commit id'), 400))
+        if (!data.updateId)
+          return cb(null, self.serveError(req,
+            new ParamError('missing update id'), 400))
         if (!data.filePath)
           return cb(null, self.serveError(req,
             new ParamError('missing file path'), 400))
@@ -345,13 +348,11 @@ G.handlePOST = function (req, dir) {
         if (isNaN(lineNumber))
           return cb(null, self.serveError(req,
             new ParamError('bad line number'), 400))
-        var repoBranches = data.repoBranch
-          ? data.repoBranch.split(',') : ''
         var msg = {
           type: 'line-comment',
           text: data.text,
           repo: data.repo,
-          repoBranch: repoBranches,
+          updateId: data.updateId,
           commitId: data.commitId,
           filePath: data.filePath,
           line: lineNumber,
@@ -360,9 +361,33 @@ G.handlePOST = function (req, dir) {
         var mentions = Mentions(data.text)
         if (mentions.length)
           msg.mentions = mentions
-        return cb(null, self.serveBuffer(200, JSON.stringify(msg, 0, 2)))
         return self.ssb.publish(msg, function (err) {
           if (err) return cb(null, self.serveError(req, err))
+          cb(null, self.serveRedirect(req, req.url))
+        })
+
+      case 'line-comment-reply':
+        if (!data.root)
+          return cb(null, self.serveError(req,
+            new ParamError('missing thread root'), 400))
+        if (!data.branch)
+          return cb(null, self.serveError(req,
+            new ParamError('missing thread branch'), 400))
+        if (!data.text)
+          return cb(null, self.serveError(req,
+            new ParamError('missing post text'), 400))
+        var msg = {
+          type: 'post',
+          root: data.root,
+          branch: data.branch,
+          text: data.text,
+        }
+        var mentions = Mentions(data.text)
+        if (mentions.length)
+          msg.mentions = mentions
+        return self.ssb.publish(msg, function (err) {
+          if (err) return cb(null, self.serveError(req, err))
+
           cb(null, self.serveRedirect(req, req.url))
         })
 
