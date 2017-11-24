@@ -795,6 +795,13 @@ G.serveMessage = function (req, id, path) {
                 GitRepo(repo), pr, path))
             })
           })
+        case 'line-comment':
+          return self.getRepo(c.repo, function (err, repo) {
+            if (err) return cb(null,
+              self.repos.serveRepoNotFound(req, c.repo, err))
+            return cb(null,
+              self.repos.serveRepoCommit(req, GitRepo(repo), c.commitId, c.filename))
+          })
         case 'issue-edit':
           if (ref.isMsgId(c.issue)) {
             return self.pullReqs.get(c.issue, function (err, issue) {
@@ -851,6 +858,11 @@ G.serveMessage = function (req, id, path) {
                         self.repos.pulls.serveRepoPullReq(req,
                           GitRepo(repo), pr, path, id))
                     })
+                  case 'line-comment':
+                    return cb(null,
+                      self.repos.serveRepoCommit(req, GitRepo(repo), rc.commitId, rc.filename))
+                  default:
+                    return cb(null, self.serveGenericMessage(req, msg, path))
                 }
               })
             })
